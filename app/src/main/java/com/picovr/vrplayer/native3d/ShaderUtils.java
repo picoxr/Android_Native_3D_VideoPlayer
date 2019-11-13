@@ -9,10 +9,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-/**
- * Created by lance.li on 2017/11/1.
- */
-
 public class ShaderUtils {
     private static final String TAG = "ShaderUtils";
 
