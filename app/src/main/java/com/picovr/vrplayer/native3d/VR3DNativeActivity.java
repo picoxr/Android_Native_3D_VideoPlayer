@@ -61,10 +61,10 @@ public class VR3DNativeActivity extends VRActivity implements RenderInterface, S
     private boolean updateSurface;
     //Vertex array
     public static final float[] PLAYER_COORDSY = new float[]{
-            200, 100, 0,
-            -200, 100, 0,
-            200, -100, 0,
-            -200, -100, 0,
+            200, 200, 0,
+            -200, 200, 0,
+            200, -200, 0,
+            -200, -200, 0,
     };
     //Left eye texture array
     public static final float[] PLAYER_LEFT = new float[]{
@@ -187,7 +187,7 @@ public class VR3DNativeActivity extends VRActivity implements RenderInterface, S
         mediaPlayer.start();
 
         Matrix.setIdentityM(modelPlayer, 0);
-        Matrix.translateM(modelPlayer, 0, 0.0f, .0f, -300f);
+        Matrix.translateM(modelPlayer, 0, 0.0f, .0f, -500f);
 
         //Set up camera
         Matrix.setLookAtM(camera, 0, 0.0f, 0.0f, CAMERA_Z, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
@@ -221,7 +221,7 @@ public class VR3DNativeActivity extends VRActivity implements RenderInterface, S
         if ("Pico Goblin".equals(android.os.Build.MODEL)) {
             GLES20.glViewport(0, 0, 1280, 1280);//Goblin
         } else if ("Pico G2 4K".equals(android.os.Build.MODEL)) {
-            GLES20.glViewport(0, 0, 2300, 2300);//G2 4K
+            GLES20.glViewport(0, 0, 2100, 2100);//G2 4K
         } else {
             GLES20.glViewport(0, 0, 2000, 2000);//G2 or CV
         }
@@ -247,7 +247,10 @@ public class VR3DNativeActivity extends VRActivity implements RenderInterface, S
 
         getPerspective(Z_NEAR, Z_FAR, 51.f, 51.f, 51.f, 51.f, perspective, 0);
 
-        Matrix.multiplyMM(modelView, 0, view, 0, modelPlayer, 0);
+         //player window not following camera
+//        Matrix.multiplyMM(modelView, 0, view, 0, modelPlayer, 0);
+        //player window following camera
+        Matrix.multiplyMM(modelView, 0, camera, 0, modelPlayer, 0);
 
         Matrix.multiplyMM(modelViewProjection, 0, perspective, 0, modelView, 0);
 
