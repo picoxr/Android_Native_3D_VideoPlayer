@@ -131,7 +131,7 @@ public class VR3DNativeActivity extends VRActivity implements RenderInterface, S
     }
 
     @Override
-    public void initGL(int i, int i1) {
+    public void initGL(int width, int height) {
 
         Log.d(TAG_TH, DBG_LC + "initGL BEGIN");
 
@@ -192,6 +192,8 @@ public class VR3DNativeActivity extends VRActivity implements RenderInterface, S
         //Set up camera
         Matrix.setLookAtM(camera, 0, 0.0f, 0.0f, CAMERA_Z, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 
+        GLES20.glViewport(0, 0,width ,height );
+        
         Log.d(TAG_TH, DBG_LC + "initGL END");
     }
 
@@ -217,16 +219,7 @@ public class VR3DNativeActivity extends VRActivity implements RenderInterface, S
     public void onDrawEye(Eye eye) {
 
         Log.d(TAG_TH, DBG_LC + "onDrawEye BEGIN");
-        //Set the viewport
-        if ("Pico Goblin".equals(android.os.Build.MODEL)) {
-            GLES20.glViewport(0, 0, 1280, 1280);//Goblin
-        } else if ("Pico G2 4K".equals(android.os.Build.MODEL)) {
-            GLES20.glViewport(0, 0, 2100, 2100);//G2 4K
-        } else {
-            GLES20.glViewport(0, 0, 2000, 2000);//G2 or CV
-        }
-
-
+      
         //Turn on depth detection
         GLES20.glEnable(GLES20.GL_DEPTH_TEST);
         //Disable clipping test
