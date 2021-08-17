@@ -1,4 +1,3 @@
-
 package com.picovr.vrplayer.native3d;
 
 import android.content.Context;
@@ -11,12 +10,10 @@ import android.opengl.Matrix;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Surface;
-
 import com.picovr.vractivity.Eye;
 import com.picovr.vractivity.HmdState;
 import com.picovr.vractivity.RenderInterface;
 import com.picovr.vractivity.VRActivity;
-
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -100,7 +97,6 @@ public class VR3DNativeActivity extends VRActivity implements RenderInterface, S
         synchronized (this) {
             updateSurface = false;
         }
-//        String videoPath = Environment.getExternalStorageDirectory().getPath() + "/demo_3dvideo.mp4";
         String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.test3d;
 
         Log.e(TAG_TH, "videoPath = " + videoPath);
@@ -195,6 +191,11 @@ public class VR3DNativeActivity extends VRActivity implements RenderInterface, S
         GLES20.glViewport(0, 0,width ,height );
         
         Log.d(TAG_TH, DBG_LC + "initGL END");
+    }
+
+    @Override
+    public void deInitGL() {
+
     }
 
 
